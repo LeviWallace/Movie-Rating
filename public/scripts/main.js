@@ -46,7 +46,6 @@ function checkNone()
 			{
 				copyUsersShow.push(user);
 				usersShow = copyUsersShow;
-				console.log(usersShow);
 			}	
 		});
 }
@@ -54,17 +53,25 @@ function checkNone()
 // takes data and only returns movies that have the ids in usersShow
 function filter(data) {
 	// if (usersShow.length == 0) return [];
-	console.log(data);
 	let out = {};
 	for (let movie in data) {
-		let copyUsersShow = usersShow.slice();
-		for (let user in data[movie]["users"]) {
-			if (usersShow.includes(user.toString())) {
-				copyUsersShow.splice(copyUsersShow.indexOf(user), 1);
+		if (usersShow.length == 0) out[movie] = data[movie]; // no filter
+		else
+		{
+			let add = false;
+			for (let user in data[movie]["users"])
+			{
+				if (!usersShow.includes(user))
+				{
+					console.log(user, movie, usersShow);
+					add = true;
+					break;
+				}
 			}
+			if (add) out[movie] = data[movie];
 		}
-		if (copyUsersShow.length == 0) out[movie] = data[movie];
 	}
+	console.log(out)
 	return out;
 }
 
@@ -82,13 +89,11 @@ function sortRatings(movieUsers) {
 		return b[1] - a[1];
 	});
 
-	console.log(sortable, "this");
 
 	let out = {};
 	sortable.forEach(item => {
 		out[item[0]] = item[1];
 	});
-	console.log("here:", out);
 	return out;
 }
 
@@ -108,7 +113,6 @@ function loadMovies() {
 
 	// repopulate
 
-	console.log(usersShow);
 	fetch("./ratings.json")
 		.then(response => { return response.json(); })
 		.then(data => {
@@ -128,7 +132,7 @@ function loadMovies() {
 								console.log(movie);
 								let listScores = "";
 								for (let id in listOfRatings) {
-									console.log(users[id]["nameIRL"], movie["title"]);
+									// console.log(users[id]["nameIRL"], movie["title"]);
 									listScores += `<li>${users[id]["nameIRL"]}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${data["movies"][name]["users"][id]}</li>`
 								}
 								const card = htmlToElement(`
@@ -187,7 +191,6 @@ window.onload = function () {
 					let currentCol = 0;
 					let rows = 0;
 					//Navbar Options
-					console.log(users);
 					for (let user in users) {
 						const checkbox = htmlToElement(`
 						<div class="navCheckboxes form-check">
