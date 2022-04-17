@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+  <link rel="stylesheet" href="styles/bootstrap-material-design.min.css">
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <title>Movie Ratings</title>
+</head>
+
+
+
+<body>
+
+
+  <div class="bmd-layout-canvas">
+    <div class="bmd-layout-container bmd-drawer-f-l bmd-drawer-overlay">
+      <header class="bmd-layout-header">
+        <div class="navbar navbar-dark bg-faded justify-content-start">
+          <button class="navbar-toggler" type="button" data-toggle="drawer" data-target="#dw-s2" aria-expanded="false">
+            <span class="sr-only">Toggle</span>
+            <i class="material-icons">menu</i>
+          </button>
+          <a class="navbar-brand" href="#">&nbsp;&nbsp;Movies</a>
+        </div>
+      </header>
+      <div id="dw-s2" style="position: fixed;" class="bmd-layout-drawer bg-faded" aria-expanded="false"
+        aria-hidden="true">
+        <header>
+          <a class="navbar-brand" style="color:rgb(0, 0, 0)">Movies</a>
+        </header>
+        <ul class="list-group">
+          <div class="card">
+            <div class="card-header">
+              <h5 class="mb-0">
+                <button class="navOptions btn btn-link" data-toggle="collapse" data-target="#collapseOne"
+                  aria-expanded="false" aria-controls="collapseOne">
+                  <i style="padding-right: 20px;" class="material-icons">sort</i><span>Sort</span>
+                </button>
+              </h5>
+            </div>
+            <div id="collapseOne" class="collapse"">
+              <div class="card-body">
+                OPTIONS
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h5 class="mb-0">
+                <button class="navOptions btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo"
+                  aria-expanded="false" aria-controls="collapseTwo">
+                  <i style="padding-right: 20px;" class="material-icons">filter_list</i><span>Filter</span>
+                </button>
+              </h5>
+            </div>
+
+            <div id="collapseTwo" class="collapse">
+              <div class="navCheckboxesContainer card-body">
+                <div class="navCheckboxes form-check">
+                  <input class="form-check-input" type="radio" id="selectAll" value="option1"
+                    checked>
+                  <label class="form-check-label" for="selecte">
+                    Select All
+                  </label>
+                </div>
+                <div class="navCheckboxes form-check">
+                  <input class="form-check-input" type="radio" id="selectNone" value="option2">
+                  <label class="form-check-label" for="exampleRadios2">
+                    Selected None
+                  </label>
+                </div>
+                <br>
+                <div id="navNamesContainer">
+
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h5 class="mb-0">
+                <button id="navSave" class="navOptions btn btn-link" 
+                  aria-expanded="false" aria-controls="collapseOne">
+                  <i style="padding-right: 20px" class="material-icons">save</i><span>Save</span>
+                </button>
+              </h5>
+            </div>
+          </div>
+          <!-- <button class="navOptions btn btn-link" data-toggle="collapse" style="position: absolute; top: 90vh"
+                    aria-expanded="false" aria-controls="collapseOne">
+                    <i style="padding-right: 20px" class="material-icons">save</i>Save</a>
+           </button> -->
+          <!-- <a id="menuSignOut" class="list-group-item"><i class="material-icons">login</i>Sign Out</a> -->
+      </div>
+      <main id="movieContainer" class="bmd-layout-content">
+        <div class="movies" class="container page-container">
+          <div id="row0" class="row">
+
+          </div>
+        </div>
+    </div>
+    </main>
+  </div>
+
+
+
+
+
+
+  <script src="scripts/jquery.min.js"></script>
+  <script src="scripts/popper.js"></script>
+  <script src="scripts/bootstrap-material-design.js"></script>
+  <script>$("body").bootstrapMaterialDesign();</script>
+  <!-- <script src="/__/firebase/7.18.0/firebase-app.js"></script>
+  <script src="/__/firebase/7.18.0/firebase-analytics.js"></script>
+  <script src="/__/firebase/7.18.0/firebase-auth.js"></script>
+  <script src="/__/firebase/7.18.0/firebase-firestore.js"></script>
+  <script src="/__/firebase/init.js"></script> -->
+  <script type="module" src="scripts/main.js"></script>
+</body>
+
+</html>

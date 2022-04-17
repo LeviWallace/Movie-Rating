@@ -1,0 +1,148 @@
+body 
+{
+    background: #ffffff;
+}
+
+.navbar 
+{
+    position: static;
+    display: block;
+    background-color: #ff0202;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.navbar-brand 
+{
+    font-size: 24px;
+}
+
+.page-container 
+{
+    margin-top: 80px;
+}
+
+.movies
+{
+    margin: 50px 50px;
+}
+
+.row
+{
+    margin-bottom: 16px;
+}
+
+.poster
+{
+    border: 10px;
+}
+
+
+
+.movie-title
+{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 0.75rem;
+    font-weight: 100;
+    font-family: Roboto,Helvetica,Arial,sans-serif;
+    text-align: center;
+    padding-bottom: 0px !important;
+    font-size: 1.5em;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    font-weight: 100px;
+    background-color: white !important;
+}
+
+.movie-ratings
+{
+    font-size: 1.4em;
+    text-align: left;
+    color: rgb(255, 255, 255);
+    font-family: Roboto,Helvetica,Arial,sans-serif;
+    font-weight: 100;
+    padding-top: 0px;
+}
+
+.movie-footer
+{
+    color: black;
+    position: absolute;
+    text-align: center;
+    font-family: Roboto,Helvetica,Arial,sans-serif;
+    bottom: 0px;
+    width: 100%;
+    font-weight: 100;
+    font-size: 1.1em;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.movie-poster-back
+{
+    position: absolute;
+    left:0;
+    object-fit: none;
+    height: 432px;
+    opacity: 0.3;
+    filter: blur(5px);
+}
+
+.navOptions
+{
+    width: 100%; 
+    text-align: left; 
+    text-transform: none;
+}
+
+.navCheckboxes {
+    margin: 5px;
+}
+
+.navCheckboxes label
+{
+    font-size: 0.8em;
+}
+
+/* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
+.card-movie {
+    background-color: transparent;
+    height: 432px;
+    box-shadow: none;
+    perspective: 1000px; /* Remove this if you don't want the 3D effect */
+}
+  
+
+  /* This container is needed to position the front and back side */
+  .card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.7s;
+    transform-style: preserve-3d;
+  }
+
+
+  /* Do an horizontal flip when you move the mouse over the flip box container */
+  .card-movie:hover .card-inner {
+    transform: rotateY(180deg);
+  }
+  
+  /* Position the front and back side */
+  .card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+  }
+  
+  /* Style the back side */
+  .card-back {
+    position: relative;
+    background-color: black;
+    color: rgb(172, 132, 132);
+    transform: rotateY(180deg);
+  }
+
