@@ -10,6 +10,68 @@ let usersShow = []; // list of ids that depict which movies are show
 //      1. list of users (if empty, everyone): FILTER
 //		2. bool reverse
 
+// takes ratings.json
+// four type:
+// 	server - server rating
+//  imdb - imdb rating
+//  alpha - 
+// 	most - 
+//  default - when added
+// --- data: data["movies"]
+function sortMovies(data)
+{
+	let out = {}
+	let type = document.querySelector('input[name="sortOption"]:checked').value;
+	if (type == "default")
+	{
+		out = data;
+	}
+	else if (type == "server")
+	{
+		let sortable = [];
+		for (var movie in data) {
+			sortable.push([movie, Number(data[movie]["avg"]), data[movie]]);
+		}
+
+		sortable.sort((a, b) => {
+			return b[1] - a[1];
+		});
+		sortable.forEach(item => {
+			out[item[0]] = item[2];
+		});
+	}
+	else if (type == "alpha")
+	{
+		out = Object.keys(data)
+			.sort()
+			.reduce((acc, key) => { 
+				acc[key] = data[key];
+				return acc;
+			}, {});
+	}
+	else if (type == "most")
+	{
+		let sortable = [];
+		for (var movie in data) {
+			sortable.push([movie, Object.keys(data[movie]["users"]).length, data[movie]]);
+		}
+		sortable.sort((a, b) => {
+			return b[1] - a[1];
+		});
+		sortable.forEach(item => {
+			out[item[0]] = item[2];
+		});
+	}
+
+	if (document.querySelector("#reverseCheck").checked) {
+		let temp = {};
+		Object.keys(out).reverse().forEach((movie) => {
+			temp[movie] = data[movie];
+		});
+		return temp;
+	}
+	return out;
+}
 
 
 document.querySelector("#selectNone").onchange = () => 
@@ -63,7 +125,6 @@ function filter(data) {
 			{
 				if (!usersShow.includes(user))
 				{
-					console.log(user, movie, usersShow);
 					add = true;
 					break;
 				}
@@ -71,7 +132,6 @@ function filter(data) {
 			if (add) out[movie] = data[movie];
 		}
 	}
-	console.log(out)
 	return out;
 }
 
@@ -123,13 +183,12 @@ function loadMovies() {
 					let currentCol = 0;
 					let rows = 0;
 					// Populate Movies
-					for (let name in filter(data["movies"])) {
+					for (let name in sortMovies(filter(data["movies"]), "most")) {
 						let listOfRatings = sortRatings(data["movies"][name]["users"]);
 						const url = `https://api.themoviedb.org/3/movie/${data["movies"][name]["id"]}?api_key=fcf8f7da9ef68f57fcd50b6179f9f8ca`
 						fetch(url)
 							.then(response => { return response.json(); })
 							.then(movie => {
-								console.log(movie);
 								let listScores = "";
 								for (let id in listOfRatings) {
 									// console.log(users[id]["nameIRL"], movie["title"]);
@@ -152,8 +211,8 @@ function loadMovies() {
 														</ul>
 												</div>
 												<div class="movie-footer card-footer">
-													General Rating: ${movie["vote_average"].toFixed(1)} <br>
-													Our Rating: ${data["movies"][name]["avg"].toFixed(1)}
+													iMDB Rating: ${movie["vote_average"].toFixed(1)} <br>
+													Server Rating: ${data["movies"][name]["avg"].toFixed(1)}
 												</div>
 											</div>
 											

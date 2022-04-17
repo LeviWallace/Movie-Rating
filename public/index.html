@@ -42,71 +42,101 @@
                 </button>
               </h5>
             </div>
-            <div id="collapseOne" class="collapse"">
-              <div class="card-body">
-                OPTIONS
-              </div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-header">
-              <h5 class="mb-0">
-                <button class="navOptions btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo"
-                  aria-expanded="false" aria-controls="collapseTwo">
-                  <i style="padding-right: 20px;" class="material-icons">filter_list</i><span>Filter</span>
-                </button>
-              </h5>
-            </div>
-
-            <div id="collapseTwo" class="collapse">
+            <div id="collapseOne" class="collapse">
+              <div class=" card-body">
               <div class="navCheckboxesContainer card-body">
-                <div class="navCheckboxes form-check">
-                  <input class="form-check-input" name="navOptions" type="radio" id="selectAll" value="option1"
-                    checked>
-                  <label class="form-check-label" for="selectAll">
-                    Select All
-                  </label>
-                </div>
-                <div class="navCheckboxes form-check">
-                  <input class="form-check-input" name="navOptions" type="radio" id="selectNone" value="option2">
-                  <label class="form-check-label" for="selectNone">
-                    Selected None
+                <div style="margin-left: 10px" class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="reverseCheck">
+                  <label style="font-size: 12px;" class="form-check-label" for="reverseCheck">
+                    Reverse
                   </label>
                 </div>
                 <br>
-                <div id="navNamesContainer">
-
+                <div class="navCheckboxes form-check">
+                  <input class="form-check-input" name="sortOption" type="radio" id="sortServerRating" value="server" checked>
+                  <label class="form-check-label" for="selectAll">
+                    Server Rating
+                  </label>
+                </div>
+                <div class="navCheckboxes form-check">
+                  <input class="form-check-input" name="sortOption" type="radio" id="sortAlphabetical" value="alpha">
+                  <label class="form-check-label" for="selectAll">
+                    Alphabetical
+                  </label>
+                </div>
+                <div class="navCheckboxes form-check">
+                  <input class="form-check-input" name="sortOption" type="radio" id="sortWatched" value="default">
+                  <label class="form-check-label" for="selectNone">
+                    Watched
+                  </label>
+                </div>
+                <div class="navCheckboxes form-check">
+                  <input class="form-check-input" name="sortOption" type="radio" id="sortWatched" value="most">
+                  <label class="form-check-label" for="selectNone">
+                    Most Votes
+                  </label>
                 </div>
               </div>
             </div>
-
-
           </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0">
+            <button class="navOptions btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo"
+              aria-expanded="false" aria-controls="collapseTwo">
+              <i style="padding-right: 20px;" class="material-icons">filter_list</i><span>Filter</span>
+            </button>
+          </h5>
+        </div>
 
-          <div class="card">
-            <div class="card-header">
-              <h5 class="mb-0">
-                <button id="navSave" class="navOptions btn btn-link" 
-                  aria-expanded="false" aria-controls="collapseOne">
-                  <i style="padding-right: 20px" class="material-icons">save</i><span>Save</span>
-                </button>
-              </h5>
+        <div id="collapseTwo" class="collapse">
+          <div class="navCheckboxesContainer card-body">
+            <div class="navCheckboxes form-check">
+              <input class="form-check-input" name="navOptions" type="radio" id="selectAll" value="option1" checked>
+              <label class="form-check-label" for="selectAll">
+                Select All
+              </label>
+            </div>
+            <div class="navCheckboxes form-check">
+              <input class="form-check-input" name="navOptions" type="radio" id="selectNone" value="option2">
+              <label class="form-check-label" for="selectNone">
+                Selected None
+              </label>
+            </div>
+            <br>
+            <div id="navNamesContainer">
+
             </div>
           </div>
-          <!-- <button class="navOptions btn btn-link" data-toggle="collapse" style="position: absolute; top: 90vh"
+        </div>
+
+
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0">
+            <button id="navSave" class="navOptions btn btn-link" aria-expanded="false" aria-controls="collapseOne">
+              <i style="padding-right: 20px" class="material-icons">save</i><span>Save</span>
+            </button>
+          </h5>
+        </div>
+      </div>
+      <!-- <button class="navOptions btn btn-link" data-toggle="collapse" style="position: absolute; top: 90vh"
                     aria-expanded="false" aria-controls="collapseOne">
                     <i style="padding-right: 20px" class="material-icons">save</i>Save</a>
            </button> -->
-          <!-- <a id="menuSignOut" class="list-group-item"><i class="material-icons">login</i>Sign Out</a> -->
-      </div>
-      <main id="movieContainer" class="bmd-layout-content">
-        <div class="movies" class="container page-container">
-          <div id="row0" class="row">
-
-          </div>
-        </div>
+      <!-- <a id="menuSignOut" class="list-group-item"><i class="material-icons">login</i>Sign Out</a> -->
     </div>
-    </main>
+    <main id="movieContainer" class="bmd-layout-content">
+      <div class="movies" class="container page-container">
+        <div id="row0" class="row">
+
+        </div>
+      </div>
+  </div>
+  </main>
   </div>
 
 
