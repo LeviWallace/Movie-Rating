@@ -13,7 +13,8 @@ import lobby
 
 os.chdir(r"C:\Users\Ethan\OneDrive\Desktop\Coding\Python\Project Discord")
 
-TOKEN = "NjYwNjEzNjY0MzgxOTkyOTcx.XgfawQ.iCq8eJt1peyITPJ8J9JEiVtkOh8"
+# TOKEN REMOVED FOR SECURITY
+TOKEN = None
 
 client = commands.Bot(command_prefix="|", help_command=None)
 client.add_cog(vote.Vote(client))
