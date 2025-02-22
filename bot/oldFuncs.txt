@@ -1,0 +1,99 @@
+@client.command()
+async def money(ctx, *, message):
+    with open("users.json", "r") as f:
+        users = json.load(f)
+
+    author = ctx.author
+    users = await updateData(users, author)
+    await updateMoney(users, author, int(message), ctx.channel)
+    await ctx.send("Added ${} to {}'s account".format(int(message), author.mention))
+
+    with open("users.json", "w") as f:
+        json.dump(users, f)
+
+@client.command()
+async def profile(ctx):
+    with open("users.json", "r") as f:
+        users = json.load(f)
+
+    users = await updateData(users, ctx.author)
+    await ctx.send("{} has ${}".format(ctx.author.mention, users[ctx.author.id]["money"]))
+
+    with open("users.json", "w") as f:
+        json.dump(users, f)
+
+@client.command()
+async def play(ctx, *, message):
+    gamename = ""
+    if message.lower() == "blackjack":
+        with open("blackjack.json", "w") as f:
+            json.dump({"cards" : [("AS", 1), ("AC", 1), ("AD", 1), ("AH", 1),
+                                  ("1S", 1), ("1C", 1), ("1D", 1), ("1H", 1),
+                                  ("2S", 2), ("2C", 2), ("2D", 2), ("2H", 2),
+                                  ("3S", 3), ("3C", 3), ("3D", 3), ("3H", 3),
+                                  ("4S", 4), ("4C", 4), ("4D", 4), ("4H", 4),
+                                  ("5S", 5), ("5C", 5), ("5D", 5), ("5H", 5),
+                                  ("6S", 6), ("6C", 6), ("6D", 6), ("6H", 6),
+                                  ("7S", 7), ("7C", 7), ("7D", 7), ("7H", 7),
+                                  ("8S", 8), ("8C", 8), ("8D", 8), ("8H", 8),
+                                  ("9S", 9), ("AC", 9), ("AD", 9), ("AH", 9),
+                                  ("0S", 10), ("0C", 10), ("0D", 10), ("0H", 10),
+                                  ("JS", 10), ("JC", 10), ("JD", 10), ("JH", 10),
+                                  ("QS", 10), ("QC", 10), ("KD", 10), ("QH", 10),
+                                  ("KS", 10), ("KC", 10), ("KD", 10), ("KH", 10)],
+            "open" : True, "pot" : 0, "users" : [ctx.author.id],
+            "hands" : {ctx.author.id : []}}, f)
+        gamename = "Blackjack"
+    else:
+        return
+    await ctx.send("A {} lobby has opened   ".format(gamename))
+
+@client.command()
+async def join(ctx):
+    with open("blackjack.json") as f:
+        bj = json.load(f)
+
+    if bj["open"]:
+        user = ctx.author
+        if not user.id in bj["users"]:
+            bj["users"].append(user.id)
+            bj["hands"][user.id] = []
+            await ctx.send("{} has joined blackjack".format(user))
+
+@client.command()
+async def startBlackjack(ctx):
+    with open("blackjack.json") as f:
+        bj = json.load(f)
+
+    bj["open"] = False
+    #   random.shuffle(bj["cards"])
+    await bjround(bj)
+
+async def bjround(bj):
+    for id in bj["users"]:
+        user = client.get_user(id)
+        if user.dm_channel == None:
+            await user.create_dm()
+        print(bj["hands"][str(id)])
+        #bj["hands"][str(id)].append(["Test", 1])
+        bj["hands"][str(id)].append(bj["cards"].pop(0))
+        bj["hands"][str(id)].append(bj["cards"].pop(0))
+        handValue = 0
+        cardNames = ""
+        for i in bj["hands"][str(id)]:
+            handValue += i[1]
+            cardNames += i[0] + " "
+
+        await user.dm_channel.send("Total Hand Value: {}\nYour Cards: {}".format(handValue, cardNames))
+
+async def updateData(users, user):
+    id = str(user.id)
+    if not id in users:
+        users[id] = {}
+        users[id]["money"] = 100
+    return users
+
+async def updateMoney(users, user, amount, channel):
+    users[user.id]["money"] += amount
+
+# Format {users:{ids:{name:name,num:#of votes used}}, items:{names:[ids]}, rules:{#of votes, no adding}}
